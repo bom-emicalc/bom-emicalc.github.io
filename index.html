@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <title>EMI Calculator</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">EMI Calculator</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="form-control">
+                    <label>Loan Type</label>
+                    <select name="entry.145867315" id="loan-type">
+                        <option value="Housing Loan">Housing Loan</option>
+                        <option value="Business Loan & Personal Loan">Business Loan & Personal Loan</option>
+                        <option value="Loan Against Property">Loan Against Property</option>
+                        <option value="Vehicle Loan">Vehicle Loan</option>
+                    </select>
+                    <i class="fas fa-check-circle"></i>
+                    <i></i>
+                    <small></small>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                dataType: "jsonp",
+                url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdhdgOqbRi9uRMkxeI31a3MXgBPdwKea_G18E8ARbWSCgIEzA/formResponse',
+                data: { 
+                    'entry.145867315': 'Shashank', 
+                    'entry.1213461070' : 'qwerty@asd.com',
+                    'entry.366586953' : '9900345123'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
