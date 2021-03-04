@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /> -->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,36 +18,203 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
-                <div class="form-control">
-                    <label>Loan Type</label>
-                    <select name="entry.145867315" id="loan-type">
-                        <option value="Housing Loan">Housing Loan</option>
-                        <option value="Business Loan & Personal Loan">Business Loan & Personal Loan</option>
-                        <option value="Loan Against Property">Loan Against Property</option>
-                        <option value="Vehicle Loan">Vehicle Loan</option>
-                    </select>
-                    <i class="fas fa-check-circle"></i>
-                    <i></i>
-                    <small></small>
-                </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <form action="" name="registration">
+                    <div class="form-group">
+                        <label for="full-name"><strong>Full Name</strong></label>
+                        <input type="text" name="full-name" id="full-name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile-number"><strong>Mobile no.</strong></label>
+                        <input type="text" name="mobile-number" id="mobile-number" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan-type"><strong>Loan Type</strong></label>
+                        <select name="loan-type" id="loan-type" class="form-control" >
+                            <option value="0" selected disabled>Select Loan Type</option>
+                            <option value="Housing Loan">Housing Loan</option>
+                            <option value="Business Loan & Personal Loan">Business Loan & Personal Loan</option>
+                            <option value="Loan Against Property">Loan Against Property</option>
+                            <option value="Vehicle Loan">Vehicle Loan</option>
+                        </select>                        
+                    </div>
+
+                    <label><strong>Date of Birth</strong></label>
+                    <div class="row">
+                        <div class="form-group col-lg-3 col-md-3 col-3">
+                            <label for="dob-date">Year</label>
+                            <select name="dob-year" id="dob-year" class="form-control" ></select>
+                        </div>                        
+
+                        <div class="form-group col-lg-6 col-md-6 col-6">
+                            <label for="dob-month">Month</label>
+                            <select name="dob-month" id="dob-month" class="form-control" ></select>
+                        </div>
+
+                        <div class="form-group col-lg-3 col-md-3 col-3">
+                            <label for="dob-date">Date</label>
+                            <select name="dob-date" id="dob-date" class="form-control" ></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan-amount"><strong>Loan Amount</strong></label>
+                        <input type="text" name="loan-amount" id="loan-amount" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="loan-tenure"><strong>Loan Tenure</strong></label>
+                        <select type="text" name="loan-tenure" id="loan-tenure" class="form-control"></select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Calculate</button>
+                </form>
             </div>
         </div>
     </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        // function validateDate() {
+        //     var date = parseInt($('#dob-date').val());
+        //     var month = parseInt($('#dob-month').val());
+        //     var year = parseInt($('#dob-year').val());
+
+        //     if (isNaN(date) || isNaN(month) || isNaN(year)) {
+        //         alert('wrong format');
+        //         return false;
+        //     } 
+        //     else {
+        //         if (date > 31 || date < 1) {
+        //             alert('wrong date');
+        //             return false;
+        //     } 
+        //     else if ((month==4 || month==6 || month==9 || month==11) && date ==31) {
+        //         alert('This month does not have 31 Days');
+        //         return false;
+        //     } 
+        //     else if (month==2) {
+        //         var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+                
+        //         if (date> 29 || (date ==29 && !isleap))
+        //             alert('February only has 28 days');
+                
+        //         return false;
+        //     }
+        //     if (month > 12 || month < 1) {
+        //         alert('wrong month');
+        //         return false;
+        //     } 
+        //     if (year > 2003 || year < 1900) {
+        //         alert('wrong year');
+        //         return false;
+        //     } 
+        // }
+
+        function populateYear(startYear, endYear) {
+            for(var i = startYear; i <= endYear; i++) {
+                var option = document.createElement("option");
+                option.text =  i;
+                option.value = i;
+
+                var select = document.getElementById("dob-year");
+                select.appendChild(option);       
+            }
+        }
+
+        function populateMonth() {
+            var monthsFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            for(var i = 0; i < 12; i++) {
+                var option = document.createElement("option");
+                option.text =  monthsFull[i];
+                option.value = i + 1;
+
+                var select = document.getElementById("dob-month");
+                select.appendChild(option);
+            }
+        }
+
+        function populateDate(maxDate) {
+            $("#dob-date").html("");
+
+            for(var i = 1; i <= maxDate; i++) {
+                var option = document.createElement("option");
+                option.text =  i;
+                option.value = i;
+
+                var select = document.getElementById("dob-date");
+                select.appendChild(option);       
+            }
+        }
+
+        $("#dob-date").on('change', function() {
+            getAge();
+        });
+        
         $(document).ready(function() {
-            $.ajax({
-                type: 'POST',
-                dataType: "jsonp",
-                url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdhdgOqbRi9uRMkxeI31a3MXgBPdwKea_G18E8ARbWSCgIEzA/formResponse',
-                data: { 
-                    'entry.145867315': 'Shashank', 
-                    'entry.1213461070' : 'qwerty@asd.com',
-                    'entry.366586953' : '9900345123'
+            var currentYear = new Date().getFullYear();
+
+            populateYear(currentYear - 71, currentYear - 18);
+            populateMonth();
+            populateDate(31);
+
+            $('#dob-month').on('change', function() {
+                var month = $(this).val();
+                var year = $("#dob-year").val();
+
+                if (year == null) {
+                    year = 1;
+                }
+
+                if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    populateDate(30);
+                } 
+                else if (month == 2) {
+                    var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+                    
+                    if (isleap)
+                        populateDate(29);
+                    else
+                        populateDate(28);
+                }
+                else {
+                    populateDate(31);
                 }
             });
-        });
+
+            $('#dob-year').on('change', function() {
+                var year = $(this).val();
+                var month = $('#dob-month').val();
+
+                if (month == 2) {
+                    var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+                    
+                    if (isleap)
+                        populateDate(29);
+                    else
+                        populateDate(28);
+                }
+            });
+        })
+
+        function getAge() {
+            var year = $('#dob-year').val();
+            var month = $('#dob-month').val();
+            var date = $('#dob-date').val();
+
+            if(month < 10) month = "0" + month;
+            if(date < 10) date = "0" + date;
+
+            var dob = year + "" + month + "" + date;
+
+            var age = moment().diff(moment(dob, 'YYYYMMDD'), 'years');
+        }
+
+        function populateTenure() {
+
+        }
     </script>
 </body>
 </html>
