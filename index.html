@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /> -->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,21 +21,40 @@
                 <form action="" name="registration">
                     <div class="form-group">
                         <label for="full-name"><strong>Full Name</strong></label>
-                        <input type="text" name="full-name" id="full-name" class="form-control" />
+                        <input 
+                            type="text" 
+                            name="full-name" 
+                            id="full-name" 
+                            class="form-control" 
+                            required 
+                            pattern="\S+" 
+                            title="Enter your full name"
+                            minlength="5"
+                            oninvalid="this.setCustomValidity('Please enter your full name. Space-only names are not allowed')"
+                            oninput="setCustomValidity('')" />
                     </div>
                     <div class="form-group">
                         <label for="mobile-number"><strong>Mobile no.</strong></label>
-                        <input type="text" name="mobile-number" id="mobile-number" class="form-control" />
+                        <input 
+                            type="text" 
+                            name="mobile-number" 
+                            id="mobile-number" 
+                            class="form-control" 
+                            required 
+                            pattern="[0-9]{10}" 
+                            title="10-Digit Mobile Number"
+                            oninvalid="this.setCustomValidity('Mobile No. should have exactly 10 digits')"
+                            oninput="setCustomValidity('')" />
                     </div>
 
                     <div class="form-group">
                         <label for="loan-type"><strong>Loan Type</strong></label>
-                        <select name="loan-type" id="loan-type" class="form-control" >
-                            <option value="0" selected disabled>Select Loan Type</option>
-                            <option value="Housing Loan">Housing Loan</option>
-                            <option value="Business Loan & Personal Loan">Business Loan & Personal Loan</option>
-                            <option value="Loan Against Property">Loan Against Property</option>
-                            <option value="Vehicle Loan">Vehicle Loan</option>
+                        <select name="loan-type" id="loan-type" class="form-control" required>
+                            <option selected disabled>Select Loan Type</option>
+                            <option value="HL">Housing Loan</option>
+                            <option value="BLPL">Business Loan & Personal Loan</option>
+                            <option value="LAP">Loan Against Property</option>
+                            <option value="VL">Vehicle Loan</option>
                         </select>                        
                     </div>
 
@@ -44,27 +62,27 @@
                     <div class="row">
                         <div class="form-group col-lg-3 col-md-3 col-3">
                             <label for="dob-date">Year</label>
-                            <select name="dob-year" id="dob-year" class="form-control" ></select>
+                            <select name="dob-year" id="dob-year" class="form-control" required ></select>
                         </div>                        
 
                         <div class="form-group col-lg-6 col-md-6 col-6">
                             <label for="dob-month">Month</label>
-                            <select name="dob-month" id="dob-month" class="form-control" ></select>
+                            <select name="dob-month" id="dob-month" class="form-control" required ></select>
                         </div>
 
                         <div class="form-group col-lg-3 col-md-3 col-3">
                             <label for="dob-date">Date</label>
-                            <select name="dob-date" id="dob-date" class="form-control" ></select>
+                            <select name="dob-date" id="dob-date" class="form-control" required ></select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="loan-amount"><strong>Loan Amount</strong></label>
-                        <input type="text" name="loan-amount" id="loan-amount" class="form-control" />
+                        <input type="text" name="loan-amount" id="loan-amount" class="form-control" required />
                     </div>
                     <div class="form-group">
                         <label for="loan-tenure"><strong>Loan Tenure</strong></label>
-                        <select type="text" name="loan-tenure" id="loan-tenure" class="form-control"></select>
+                        <select type="text" name="loan-tenure" id="loan-tenure" class="form-control" required></select>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Calculate</button>
@@ -74,43 +92,9 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+   
+    <script type="text/javascript" src="bizRate.json"></script>
     <script type="text/javascript">
-        // function validateDate() {
-        //     var date = parseInt($('#dob-date').val());
-        //     var month = parseInt($('#dob-month').val());
-        //     var year = parseInt($('#dob-year').val());
-
-        //     if (isNaN(date) || isNaN(month) || isNaN(year)) {
-        //         alert('wrong format');
-        //         return false;
-        //     } 
-        //     else {
-        //         if (date > 31 || date < 1) {
-        //             alert('wrong date');
-        //             return false;
-        //     } 
-        //     else if ((month==4 || month==6 || month==9 || month==11) && date ==31) {
-        //         alert('This month does not have 31 Days');
-        //         return false;
-        //     } 
-        //     else if (month==2) {
-        //         var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-                
-        //         if (date> 29 || (date ==29 && !isleap))
-        //             alert('February only has 28 days');
-                
-        //         return false;
-        //     }
-        //     if (month > 12 || month < 1) {
-        //         alert('wrong month');
-        //         return false;
-        //     } 
-        //     if (year > 2003 || year < 1900) {
-        //         alert('wrong year');
-        //         return false;
-        //     } 
-        // }
-
         function populateYear(startYear, endYear) {
             for(var i = startYear; i <= endYear; i++) {
                 var option = document.createElement("option");
@@ -148,10 +132,6 @@
                 select.appendChild(option);       
             }
         }
-
-        $("#dob-date").on('change', function() {
-            getAge();
-        });
         
         $(document).ready(function() {
             var currentYear = new Date().getFullYear();
@@ -210,11 +190,90 @@
             var dob = year + "" + month + "" + date;
 
             var age = moment().diff(moment(dob, 'YYYYMMDD'), 'years');
+
+            return age;
         }
 
         function populateTenure() {
+            const loanType = $("#loan-type").val();
 
+            if(loanType == "HL") {
+                pt(2, 30);
+            }
+            else if(loanType == "BLPL") {
+                pt(2, 7);
+            }
+            else if(loanType == "LAP") {
+                pt(5, 30);
+            }
+            else if(loanType == "VL") {
+                pt(2, 8);
+            }
         }
+
+        function pt(min, max) {
+            $("#loan-tenure").html("");
+
+            for(var i = min; i <= max; i++) {
+                var option = document.createElement("option");
+                option.text =  i;
+                option.value = i;
+
+                var select = document.getElementById("loan-tenure");
+                select.appendChild(option);          
+            }
+        }
+
+        $("#loan-type").on('change', function() {
+            populateTenure();
+        });
+
+
+        $('form').on('submit', function(e){
+            e.preventDefault();
+
+            var name = $("#full-name").val();
+            var mobileNo = $("#mobile-number").val();
+            var loanType = $("#loan-type").val();
+            
+            var loanAmount = $("#loan-amount").val();
+            var loanTenure = $("#loan-tenure").val();
+            var age = getAge();
+
+            var type = "";
+            if(loanType == "HL") {
+                bizRate = JSON.parse(hlrt);
+                type = "Home Loan";
+            }
+            else if(loanType == "BLPL") {
+                bizRate = JSON.parse(blplrt);
+                type = "Business/Personal Loan";
+            }
+            else if(loanType == "LAP") {
+                bizRate = JSON.parse(laprt);
+                type = "Loan against Property";
+            }
+            else if(loanType == "VL") {
+                bizRate = JSON.parse(vlrt);
+                type = "Vehicle Loan";
+            }
+
+            alert(bizRate[age][loanTenure]);
+
+            $.ajax({
+                type: 'POST',
+                dataType: "jsonp",
+                url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfCtKKh7Pn28ZDwbAzp8wgSAdJLE7hirkwy7TpW5w0AKdYDhw/formResponse',
+                data: { 
+                    'entry.248671550': name, 
+                    'entry.432586244' : mobileNo,
+                    'entry.423887042' : age,
+                    'entry.232635046' : type,
+                    'entry.1847213916' : loanAmount,
+                    'entry.138434960' : loanTenure
+                }
+            });
+        });
     </script>
 </body>
 </html>
