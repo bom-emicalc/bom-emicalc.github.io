@@ -1,3 +1,38 @@
 .container {
 	padding-top: 1em; 
 }
+
+.result {
+	position: fixed;
+	z-index: 2;
+	height: 100%;
+	width: 100%;
+	margin-top: 4rem;
+	background-color: white;
+	padding: 1.2rem;
+}
+
+.result > h5 { display: inline-block; }
+.result > button {
+	float: right;
+}
+
+ul {
+	list-style-type:none;
+	margin-left: -10px;
+	margin-top: 30px;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group > label { margin-bottom: 6px; }
+
+.hidden {
+	display: none;
+}
+
+li:last-child {
+	margin-top: 10px;
+}
