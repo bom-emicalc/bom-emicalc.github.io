@@ -36,3 +36,13 @@ ul {
 li:last-child {
 	margin-top: 10px;
 }
+
+.note {
+	margin: 2rem 1.2rem;
+	color: #dc3545 !important; 	
+	/*color: #fd7e14;*/
+}
+
+.red {
+	font-weight: bold;
+}

@@ -31,6 +31,10 @@
                 </ul>
             </div>
         </div>
+        <div class="note">
+            NE : Not Eligible </br>
+            NOTE : If your <span class="red">AGE</span> is more than <span class="red">70 years</span> or your <span class="red">AGE + LOAN_TENURE</span> is more than <span class="red">75</span>, you'll not be eligible for the loan.
+        </div>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -283,25 +287,26 @@
                 type = "Vehicle Loan";
             }
 
-            var premiumRate = bizRate[age][loanTenure];
-
-            if(premiumRate == "" || premiumRate == "0") {
-                $("#lamt").html("₹ " + loanAmount);
-                $("#pamt").html("NA");
-                $("#gstamt").html("NA");
-                $("#totalamt").html("NA");
-            } 
-            else {
-                var ppa = (loanAmount*premiumRate)/1000;
-                var gst = ppa*0.18;
-                var tot = ppa + gst;
-
-                $("#lamt").html("₹ " + loanAmount);
-                $("#pamt").html("₹ " + ppa);
-                $("#gstamt").html("₹ " + gst);
-                $("#totalamt").html("₹ " + tot);                
+            if(age > 70) {
+                printNotEligible(loanAmount);
             }
+            else {
+                var premiumRate = bizRate[age][loanTenure];
 
+                if(premiumRate == "" || premiumRate == "0") {
+                    printNotEligible(loanAmount);
+                }
+                else {
+                    var ppa = (loanAmount*premiumRate)/1000;
+                    var gst = ppa*0.18;
+                    var tot = ppa + gst;
+
+                    $("#lamt").html("₹ " + loanAmount);
+                    $("#pamt").html("₹ " + ppa);
+                    $("#gstamt").html("₹ " + gst);
+                    $("#totalamt").html("₹ " + tot);                                    
+                }
+            }
 
             $("#result").toggleClass("hidden");
 
@@ -323,6 +328,13 @@
         $("#btn-close").on('click', function() {
             $("#result").toggleClass("hidden");
         });
+
+        function printNotEligible(loanAmount) {
+            $("#lamt").html("₹ " + loanAmount);
+            $("#pamt").html("NE");
+            $("#gstamt").html("NE");
+            $("#totalamt").html("NE");
+        }
     </script>
 </body>
 </html>
