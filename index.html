@@ -14,7 +14,7 @@
         <h5 class="alert-heading">Loan Details</h5>
         <button type="button" class="btn-close" id="btn-close"></button>
         <div class="row">
-            <div class="col-6">
+            <div class="col-lg-4 col-md-6 col-7">
                 <ul>
                     <li>Loan Amount</li>
                     <li>Premium Amount</li>
@@ -22,7 +22,7 @@
                     <li><strong>Total (Premium + Tax)</strong></li>
                 </ul>                
             </div>
-            <div class="col-6">
+            <div class="col-lg-8 col-md-6 col-5">
                 <ul>
                     <li><span id="lamt"></span></li>
                     <li><span id="pamt"></span></li>
@@ -103,12 +103,22 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="loan-amount"><strong>Loan Amount</strong></label>
-                        <input type="text" name="loan-amount" id="loan-amount" class="form-control" required />
+                        <label for="loan-amount"><strong>Loan Amount <span id="limit-label"></span></strong></label>
+                        <input 
+                            type="number" 
+                            name="loan-amount" 
+                            id="loan-amount"
+                            class="form-control" 
+                            disabled 
+                            required  
+                            min="100000" 
+                            max="10000000"
+                            oninvalid="this.setCustomValidity('Please enter the Amount within the given limit')"
+                            oninput="setCustomValidity('')" />
                     </div>
                     <div class="form-group">
                         <label for="loan-tenure"><strong>Loan Tenure</strong></label>
-                        <select type="text" name="loan-tenure" id="loan-tenure" class="form-control" required></select>
+                        <select type="text" name="loan-tenure" id="loan-tenure" class="form-control" required disabled></select>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Calculate</button>
@@ -119,8 +129,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <script type="text/javascript" src="bizRate.json"></script>
     <script type="text/javascript">
@@ -227,17 +235,31 @@
             const loanType = $("#loan-type").val();
 
             if(loanType == "HL") {
+                setLoanLimits(200000, 10000000);
                 pt(2, 30);
             }
             else if(loanType == "BLPL") {
+                setLoanLimits(100000, 7500000);
                 pt(2, 7);
             }
             else if(loanType == "LAP") {
+                setLoanLimits(100000, 10000000);
                 pt(5, 30);
             }
             else if(loanType == "VL") {
+                setLoanLimits(100000, 10000000);
                 pt(2, 8);
             }
+
+            $("#loan-amount").removeAttr("disabled");
+            $("#loan-tenure").removeAttr("disabled");
+        }
+
+        function setLoanLimits(min, max) {
+            $("#loan-amount").attr("min", min);
+            $("#loan-amount").attr("max", max);
+
+            $("#limit-label").html("(Between ₹ "+ min.toLocaleString('hi') +" to ₹ "+ max.toLocaleString('hi') +")")
         }
 
         function pt(min, max) {
@@ -287,6 +309,9 @@
                 type = "Vehicle Loan";
             }
 
+            const amt = loanAmount;
+            loanAmount = parseInt(loanAmount).toLocaleString('hi', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
             if(age > 70) {
                 printNotEligible(loanAmount);
             }
@@ -297,9 +322,13 @@
                     printNotEligible(loanAmount);
                 }
                 else {
-                    var ppa = (loanAmount*premiumRate)/1000;
+                    var ppa = (amt*premiumRate)/1000;
                     var gst = ppa*0.18;
                     var tot = ppa + gst;
+
+                    ppa = ppa.toLocaleString('hi', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    gst = gst.toLocaleString('hi', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    tot = tot.toLocaleString('hi', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
                     $("#lamt").html("₹ " + loanAmount);
                     $("#pamt").html("₹ " + ppa);
